@@ -1,0 +1,66 @@
+<a href="/sessions/destroy">Logout</a>
+<p>Name: <%=@lender.f_name%> <%=@lender.l_name%></p>
+<p>Account Balance: $<%=@lender.money%></p>
+<%=flash[:error]%>
+<h3>List of people in need of help:</h3>
+<table border="black">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Need Money For</th>
+			<th>Reason for Loan</th>
+			<th>Amount Needed</th>
+			<th>Amount Raised</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @people.each do |p| %>
+		<tr>
+			<td><%=p.f_name%> <%=p.l_name%></td>
+			<td><%=p.purpose%> </td>
+			<td><%=p.description%> </td>
+			<td><%=p.money%> </td>
+			<td><%=p.raised%> </td>
+			<td><form action="/histories/create" method="post">
+				<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+				<input type="hidden" name="lender_id" value="<%= @lender.id %>">
+				<input type="hidden" name="borrower_id" value="<%= p.id %>">
+				<select name="amount">
+					<option>25</option>
+					<option>50</option>
+					<option>100</option>
+					<option>500</option>
+					<option>1000</option>
+				</select>
+				<input type="submit" value="Lend">
+			</form></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<h3>List of people you lent money to:</h3>
+<table border="black">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Need Money For</th>
+			<th>Reason for Loan</th>
+			<th>Amount Needed</th>
+			<th>Amount Raised</th>
+			<th>Amount Lent</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for b in @borrowers %>
+		<tr>
+			<td><%=b.borrower.f_name%> <%=b.borrower.l_name%></td>
+			<td><%=b.borrower.purpose%> </td>
+			<td><%=b.borrower.description%> </td>
+			<td><%=b.borrower.money%> </td>
+			<td><%=b.borrower.raised%> </td>
+			<td><%= b.amount %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

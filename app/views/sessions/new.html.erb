@@ -1,0 +1,49 @@
+<h1>Lender</h1>
+<%=flash[:error]%>
+<form action="/lenders/create" method="post">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	First Name: <input type="text" name="lender[f_name]">
+	<br>
+	Last Name: <input type="text" name="lender[l_name]">
+	<br>
+	Email: <input type="text" name="lender[email]">
+	<br>
+	Password: <input type="password" name="lender[password]">
+	<br>
+	Money <select name="lender[money]">
+		<option>100</option>
+		<option>500</option>
+		<option>1000</option>
+		<option>10000</option>
+	</select>
+	<input type="submit" value="Register">
+</form>
+<a href="/login">Already a member?</a>
+
+<h1>Borrower</h1>
+<form action="/borrowers/create" method="post">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	<input type="hidden" name="borrower[raised]" value="0">
+	First Name: <input type="text" name="borrower[f_name]">
+	<br>
+	Last Name: <input type="text" name="borrower[l_name]">
+	<br>
+	Email: <input type="text" name="borrower[email]">
+	<br>
+	Password: <input type="password" name="borrower[password]">
+	<br>
+	Need Money For: <input type="text" name="borrower[purpose]">
+	<br>
+	Description: <textarea name="borrower[description]"></textarea>
+	<br>
+	Amount Needed: <select name="borrower[money]">
+		<option>100</option>
+		<option>500</option>
+		<option>1000</option>
+		<option>3000</option>
+		<option>10000</option>
+	</select>
+	<br>
+	<input type="submit" value="Register">
+</form>
+<a href="/login">Already a member?</a>
