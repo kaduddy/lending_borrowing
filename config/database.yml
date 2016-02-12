@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: lending_borrowing_production
-  username: lending_borrowing
-  password: <%= ENV['LENDING_BORROWING_DATABASE_PASSWORD'] %>
+  username: ubuntu
+  password: 
